@@ -1,0 +1,79 @@
+<h2>Notícias recentes</h2>
+<p>Clique no título da notícia para expandir</p>
+<div>
+  <ul>
+    <li *ngFor="let noticia of noticias">
+      <p (click)="mostrar(noticia)">{{ noticia.titulo }}</p>
+      <p *ngIf="noticia.visivel">
+      {{ noticia.descricao }}<br>
+      {{ noticia.data }}<br>
+      {{noticia.noticia_publicada}}<br>
+      {{ noticia.categoria }}<br>
+      {{ noticia.tags }}<br>
+      {{ noticia.editoria }}<br>
+      <br>
+      <button (click)="fechar(noticia)">Fechar</button>
+      <button (click)="excluir(noticia)">Excluir</button>
+      </p>
+    </li>
+  </ul>   
+</div>
+
+<form #cadastro="ngForm"(submit)="salvar()">
+  <h1>Cadastrar notícia</h1>
+  <div>
+    <label for="titulo">Título:</label><br>
+    <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required><br>
+  </div>
+
+  <div>
+    <label for="descricao">Descrição:</label><br>
+    <textarea id="descricao" name="descricao" cols="90" rows="10" [(ngModel)]="descricao" required></textarea>
+  </div>
+
+  <div>
+    <label for="data">Data:</label><br>
+    <input type="date" name="data" id="data" [(ngModel)]="data">
+  </div>
+
+  <div>
+    noticia publicada
+    <label for="sim"> <input [(ngModel)]="noticia_publicada" type="checkbox" id="sim" name="sim" checked> Sim</label>
+  </div>
+
+  <div>
+    <label for="categoria">Categoria</label><br>
+    <select type="categoria" id="categoria" name="categoria" [(ngModel)]="categoria" required>
+      <option value="política">Política</option>
+      <option value="economia">Economia</option>
+      <option value="esporte">Esporte</option>
+      <option value="entretenimento">Entretenimento</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="tags">Tags:</label><br>
+    <select multiple type="tags" id="tags" name="tags" [(ngModel)]="tags" required>
+      <option value="politica">Política</option>
+      <option value="economia">Economia</option>
+      <option value="esporte">Esporte</option>
+      <option value="entreterimento">Entreterimento</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="editoria">Editoria:</label><br>
+    <input type="radio" name="editoria" id="editoria" value="politica" [(ngModel)]="editoria" required>Política<br>
+    <input type="radio" name="editoria" id="editoria" value="economia" [(ngModel)]="editoria" required>Economia<br>
+    <input type="radio" name="editoria" id="editoria" value="esporte" [(ngModel)]="editoria" required>Esporte<br>
+    <input type="radio" name="editoria" id="editoria" value="entreterimento" [(ngModel)]="editoria" required>Entreterimento<br>
+  </div>
+
+
+
+
+  <div>
+    <button type="submit" [disabled]="!cadastro.form.valid">Salvar</button>
+    <button type="reset" formnovalidate>Limpar</button>
+  </div>
+</form>
